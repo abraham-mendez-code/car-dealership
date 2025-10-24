@@ -216,6 +216,24 @@ public class UserInterface {
 
     public void processAddVehicleRequest() {
 
+        // get user input
+        int vin = getAInteger("Enter the vehicle vin: ");
+        int year = getAInteger("Enter the vehicle year: ");
+        String make = getAString("Enter the vehicle make: ");
+        String model = getAString("Enter the vehicle model: ");
+        String vehicleType = getAString("Enter the vehicle type: ");
+        String color = getAString("Enter the vehicle color: ");
+        int odometer = getAInteger("Enter the vehicle odometer: ");
+        double price = getADouble("Enter the vehicle price: ");
+
+        // create a new Vehicle with the specified attributes
+        Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+        // add the Vehicle to the dealership
+        dealership.addVehicle(vehicle);
+
+        // Add the vehicle to the file
+        DealershipFileManager.saveDealership(dealership);
 
     }
 
@@ -304,6 +322,58 @@ public class UserInterface {
             System.out.println(input);
         }
 
+    }
+
+    // methods for getting parsing user input
+    private double getADouble(String message) {
+        double price;
+        // get a valid price
+        while (true) {
+            try {
+                System.out.print(message);
+                price = Double.parseDouble(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Only numbers allowed");
+            }
+        }
+        return price;
+    }
+
+    private int getAInteger(String message) {
+        int odometer;
+        while (true) {
+            try {
+                System.out.print(message);
+                odometer = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Only numbers allowed");
+            }
+        }
+        return odometer;
+    }
+
+    private String getAString(String message) {
+
+        String output;
+        // get a valid model
+        while (true) {
+
+            System.out.print(message);
+            output = scanner.nextLine().trim();
+
+            if (output.matches("[0-9]+")) {
+                System.out.println("No numbers allowed.");
+                continue;
+            }
+            if (output.isBlank()) {
+                System.out.println("Cannot be empty.");
+                continue;
+            }
+            break;
+        }
+        return output;
     }
 
     // this method returns a centered input string
