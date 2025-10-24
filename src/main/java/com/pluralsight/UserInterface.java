@@ -142,6 +142,26 @@ public class UserInterface {
                 Enter a command:\s""";
     }
 
+    private void displayVehicles(ArrayList<Vehicle> vehicles) {
 
+        for (Vehicle vehicle: vehicles) {
+
+            // get the attributes for the current vehicle
+            int vin = vehicle.getVin();
+            int year = vehicle.getYear();
+            String make = vehicle.getMake();
+            String model = vehicle.getModel();
+            String vehicleType = vehicle.getVehicleType();
+            String color = vehicle.getColor();
+            int odometer = vehicle.getOdometer();
+            double price = vehicle.getPrice();
+
+            // assign the attributes to a formated input String
+            String input = String.format("%-10d|%-10d|%-10s|%-10s|%-10s|%-10s|%-10d|%-10.2f");
+
+            System.out.println(input);
+        }
+
+    }
 
 }
