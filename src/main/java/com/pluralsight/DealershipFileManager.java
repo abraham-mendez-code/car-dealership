@@ -50,6 +50,7 @@ public class DealershipFileManager {
 
 
             }
+            bufferedReader.close();
 
             // return the dealership
             return dealership;
@@ -73,7 +74,7 @@ public class DealershipFileManager {
             String phone = dealership.getPhone();
 
             // format the attributes into an input string
-            String input = String.format("%s|%s|%s", name, address, phone);
+            String input = String.format("%s|%s|%s\n", name, address, phone);
 
             // write the input to the first line
             bufferedWriter.write(input);
@@ -92,12 +93,13 @@ public class DealershipFileManager {
                 double price = vehicle.getPrice();
 
                 // assign the attributes to a formated input String
-                input = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f");
+                input = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n", vin, year, make, model, vehicleType, color, odometer, price);
 
                 // write the input to the inventory file
                 bufferedWriter.write(input);
 
             }
+            bufferedWriter.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
