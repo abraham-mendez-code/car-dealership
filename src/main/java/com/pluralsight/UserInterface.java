@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UserInterface {
 
@@ -232,14 +233,24 @@ public class UserInterface {
         // add the Vehicle to the dealership
         dealership.addVehicle(vehicle);
 
-        // Add the vehicle to the file
+        // Save the dealership
         DealershipFileManager.saveDealership(dealership);
 
     }
 
     public void processRemoveVehicleRequest() {
 
+        // parse user input for vin
+        int vin = getAInteger("Enter the vehicle vin: ");
 
+        // remove the vehicle with a matching vin
+        dealership.removeVehicle(
+        this.dealership.getAllVehicles().stream()
+                .filter(v -> v.getVin() == vin)
+                .collect(Collectors.toList()).get(0));
+
+        // Save the dealership
+        DealershipFileManager.saveDealership(dealership);
 
     }
 
