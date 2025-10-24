@@ -97,12 +97,24 @@ public class UserInterface {
             }
         }
 
+        // perform search and display result
         displayVehicles(this.dealership.getVehiclesByPrice(min, max));
 
     }
 
     public void processGetByMakeModelRequest() {
+        String make = "";
+        String model = "";
 
+        // get user input
+        System.out.print("Enter the make: ");
+        make = scanner.nextLine().trim().toLowerCase();
+
+        System.out.print("Enter the model: ");
+        model = scanner.nextLine().trim().toLowerCase();
+
+        // perform search and display result
+        displayVehicles(this.dealership.getVehiclesByMakeModel(make, model));
 
     }
 

@@ -44,7 +44,9 @@ public class Dealership {
 
     public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
 
-        return null;
+        return (ArrayList<Vehicle>) vehicles.stream()
+                .filter(v -> v.getMake().toLowerCase().contains(make) && v.getModel().toLowerCase().contains(model))
+                .collect(Collectors.toList());
 
     }
 
