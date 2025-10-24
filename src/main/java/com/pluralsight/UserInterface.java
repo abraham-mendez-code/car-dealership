@@ -165,7 +165,35 @@ public class UserInterface {
 
     public void processGetByMileageRequest() {
 
+        int min;
+        int max;
 
+        // this loop will prompt for min value input until valid input is entered
+        while (true) {
+            try {
+                System.out.print("Enter a min value: ");
+                min = Integer.parseInt(scanner.nextLine());
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Only numbers are allowed.");
+            }
+        }
+
+        // this loop will prompt for max value input until valid input is entered
+        while (true) {
+            try {
+                System.out.print("Enter a max value: ");
+                max = Integer.parseInt(scanner.nextLine());
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Only numbers are allowed.");
+            }
+        }
+
+        // perform search and display result
+        displayVehicles(this.dealership.getVehiclesByMileage(min, max));
 
     }
 

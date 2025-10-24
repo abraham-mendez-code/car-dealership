@@ -70,10 +70,12 @@ public class Dealership {
 
     }
 
-    public ArrayList<Vehicle> getVehiclesByMileage(double min, double max) {
+    public ArrayList<Vehicle> getVehiclesByMileage(int min, int max) {
 
-
-        return null;
+        // this returns a Vehicle list with mileage values within a specified range
+        return (ArrayList<Vehicle>) vehicles.stream()
+                .filter(v -> v.getOdometer() >= min && v.getOdometer() <= max)
+                .collect(Collectors.toList());
 
     }
 
