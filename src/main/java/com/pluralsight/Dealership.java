@@ -52,7 +52,9 @@ public class Dealership {
 
     public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
 
-        return null;
+        return (ArrayList<Vehicle>) vehicles.stream()
+                .filter(v -> v.getYear() >= min && v.getYear() <= max)
+                .collect(Collectors.toList());
 
     }
 
