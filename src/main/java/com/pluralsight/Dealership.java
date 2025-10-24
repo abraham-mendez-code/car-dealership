@@ -71,14 +71,14 @@ public class Dealership {
 
     public ArrayList<Vehicle> getAllVehicles() {
 
-        return null;
+        return this.vehicles;
 
     }
 
     // helper methods
     public void addVehicle(Vehicle vehicle) {
 
-
+        this.vehicles.add(vehicle);
 
     }
 
