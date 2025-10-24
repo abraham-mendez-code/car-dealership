@@ -11,6 +11,7 @@ public class Dealership {
 
     private ArrayList<Vehicle> vehicles;
 
+    // public constructors
     public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
@@ -18,6 +19,20 @@ public class Dealership {
         this.vehicles = new ArrayList<>();
     }
 
+    // getter methods
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    // derived getters
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
 
         return null;
@@ -60,6 +75,7 @@ public class Dealership {
 
     }
 
+    // utility methods
     public void addVehicle(Vehicle vehicle) {
 
 
