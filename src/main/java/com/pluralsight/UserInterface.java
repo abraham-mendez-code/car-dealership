@@ -71,48 +71,49 @@ public class UserInterface {
 
     }
 
-    public static void processGetByMakeModelRequest() {
+    public void processGetByMakeModelRequest() {
 
 
     }
 
-    public static void processGetByYearRequest() {
+    public void processGetByYearRequest() {
 
 
     }
 
-    public static void processGetByColorRequest() {
+    public void processGetByColorRequest() {
 
 
     }
 
-    public static void processGetByMileageRequest() {
-
-
-
-    }
-
-    public static void processGetByVehicleTypeRequest() {
-
-    }
-
-    public static void processGetByAllVehicleRequest() {
-
-
-    }
-
-    public static void processAddVehicleRequest() {
-
-
-    }
-
-    public static void processRemoveVehicleRequest() {
+    public void processGetByMileageRequest() {
 
 
 
     }
 
-    // helper methods
+    public void processGetByVehicleTypeRequest() {
+
+    }
+
+    public void processGetByAllVehicleRequest() {
+
+        displayVehicles(this.dealership.getAllVehicles());
+
+    }
+
+    public void processAddVehicleRequest() {
+
+
+    }
+
+    public void processRemoveVehicleRequest() {
+
+
+
+    }
+
+    // private helper methods
     private String mainMenu() {
 
         return """

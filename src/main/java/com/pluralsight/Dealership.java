@@ -75,7 +75,7 @@ public class Dealership {
 
     }
 
-    // utility methods
+    // helper methods
     public void addVehicle(Vehicle vehicle) {
 
 
