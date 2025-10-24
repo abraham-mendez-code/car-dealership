@@ -1,17 +1,73 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class UserInterface {
 
+    // private attributes
     private Dealership dealership;
 
-    private UserInterface() {
+    // public constructor
+    public UserInterface() {
     }
 
-    public static void display() {
+    private void init() {
+        this.dealership = DealershipFileManager.getDealership();
+    }
+
+    public void display() {
+        Scanner scanner = new Scanner(System.in);
+        init();
+
+        while(true) {
+            try {
+                // this prints out the mainMenu display
+                System.out.println(mainMenu());
+                // try to parse for a command
+                int command = Integer.parseInt(scanner.nextLine());
+
+                // call a method based on input command or exit the loop
+                switch (command) {
+                    case 1:
+                        processGetByPriceRequest();
+                        break;
+                    case 2:
+                        processGetByMakeModelRequest();
+                        break;
+                    case 3:
+                        processGetByYearRequest();
+                        break;
+                    case 4:
+                        processGetByColorRequest();
+                        break;
+                    case 5:
+                        processGetByMileageRequest();
+                        break;
+                    case 6:
+                        processGetByVehicleTypeRequest();
+                        break;
+                    case 7:
+                        processGetByAllVehicleRequest();
+                        break;
+                    case 8:
+                        processAddVehicleRequest();
+                        break;
+                    case 9:
+                        processRemoveVehicleRequest();
+                        break;
+                    case 0:
+                        return;
+                }
+
+            } catch (NumberFormatException e) { // User did not enter a number...
+                System.out.println("Command must be a number");
+            }
+        }
 
     }
 
-    public static void processGetByPriceRequest() {
+    public void processGetByPriceRequest() {
 
     }
 
@@ -53,5 +109,39 @@ public class UserInterface {
     public static void processRemoveVehicleRequest() {
 
 
+
     }
+
+    // helper methods
+    private String mainMenu() {
+
+        return """
+                
+                .------------------------------------------------------------------.
+                | _____             ______           _               _     _       |
+                |/  __ \\            |  _  \\         | |             | |   (_)      |
+                || /  \\/ __ _ _ __  | | | |___  __ _| | ___ _ __ ___| |__  _ _ __  |
+                || |    / _` | '__| | | | / _ \\/ _` | |/ _ \\ '__/ __| '_ \\| | '_ \\ |
+                || \\__/\\ (_| | |    | |/ /  __/ (_| | |  __/ |  \\__ \\ | | | | |_) ||
+                | \\____/\\__,_|_|    |___/ \\___|\\__,_|_|\\___|_|  |___/_| |_|_| .__/ |
+                |                                                           | |    |
+                |                                                           |_|    |
+                '------------------------------------------------------------------'
+                
+                Available commands
+                1 - Search vehicles by price
+                2 - Search vehicles by make and model
+                3 - Search vehicles by year
+                4 - Search vehicles by color
+                5 - Search vehicles by mileage
+                6 - Search vehicles by type
+                7 - View all Vehicles
+                8 - Add Inventory
+                9 - Remove Inventory
+                0 - Exit
+                Enter a command:\s""";
+    }
+
+
+
 }
