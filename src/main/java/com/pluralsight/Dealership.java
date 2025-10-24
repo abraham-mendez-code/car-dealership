@@ -81,7 +81,10 @@ public class Dealership {
 
     public ArrayList<Vehicle> getVehiclesByType(String vehicleType) {
 
-        return null;
+        // this returns a Vehicle list with matching values for vehicleType
+        return (ArrayList<Vehicle>) vehicles.stream()
+                .filter(v -> v.getVehicleType().equalsIgnoreCase(vehicleType))
+                .collect(Collectors.toList());
 
     }
 
@@ -100,7 +103,7 @@ public class Dealership {
 
     public void removeVehicle(Vehicle vehicle) {
 
-
+        this.vehicles.remove(vehicle);
 
     }
 
