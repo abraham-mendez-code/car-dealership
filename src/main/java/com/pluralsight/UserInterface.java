@@ -7,6 +7,7 @@ public class UserInterface {
 
     // private attributes
     private Dealership dealership;
+    Scanner scanner = new Scanner(System.in);
 
     // public constructor
     public UserInterface() {
@@ -17,7 +18,7 @@ public class UserInterface {
     }
 
     public void display() {
-        Scanner scanner = new Scanner(System.in);
+
         init();
 
         while(true) {
@@ -68,6 +69,35 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest() {
+
+        double min;
+        double max;
+
+        // this loop will prompt for min value input until valid input is entered
+        while (true) {
+            try {
+                System.out.print("Enter a min value: ");
+                min = Double.parseDouble(scanner.nextLine());
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Only numbers are allowed.");
+            }
+        }
+
+        // this loop will prompt for max value input until valid input is entered
+        while (true) {
+            try {
+                System.out.print("Enter a max value:");
+                max = Double.parseDouble(scanner.nextLine());
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Only numbers are allowed.");
+            }
+        }
+
+        displayVehicles(this.dealership.getVehiclesByPrice(min, max));
 
     }
 
