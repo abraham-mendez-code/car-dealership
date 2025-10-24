@@ -57,7 +57,7 @@ public class Dealership {
 
     }
 
-    public ArrayList<Vehicle> getVehiclesByMilage(double min, double max) {
+    public ArrayList<Vehicle> getVehiclesByMileage(double min, double max) {
 
         return null;
 
