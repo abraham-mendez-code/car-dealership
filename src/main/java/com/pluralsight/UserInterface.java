@@ -145,6 +145,25 @@ public class UserInterface {
 
     private void displayVehicles(ArrayList<Vehicle> vehicles) {
 
+        String input = String.format(
+                "%s|%s|%s|%s|%s|%s|%s|%s",
+                center("vin", 10),
+                center("year", 10),
+                center("make", 10),
+                center("model", 10),
+                center("vehicleType", 10),
+                center("color", 10),
+                center("odometer", 10),
+                center("price", 10)
+        );
+
+        System.out.println(input);
+
+        for (int i = 0; i < input.length(); i++){
+            System.out.print("=");
+        }
+        System.out.println();
+
         for (Vehicle vehicle: vehicles) {
 
             // get the attributes for the current vehicle
@@ -158,11 +177,56 @@ public class UserInterface {
             double price = vehicle.getPrice();
 
             // assign the attributes to a formated input String
-            String input = String.format("%-10d|%-10d|%-10s|%-10s|%-10s|%-10s|%-10d|%-10.2f");
+            input = String.format(
+                    "%s|%s|%s|%s|%s|%s|%s|%s",
+                    center(vin, 10),
+                    center(year, 10),
+                    center(make, 10),
+                    center(model, 10),
+                    center(vehicleType, 10),
+                    center(color, 10),
+                    center(odometer, 10),
+                    center(price, 10)
+            );
 
             System.out.println(input);
         }
 
+    }
+
+    // this method returns a centered input string
+    private static String center(String text, int width) {
+        if (text == null || width <= text.length()) {
+            return text;
+        }
+        int padding = width - text.length();
+        int padStart = padding / 2;
+        int padEnd = padding - padStart;
+        return " ".repeat(padStart) + text + " ".repeat(padEnd);
+    }
+
+    private static String center(int input, int width) {
+        String text = String.valueOf(input);
+        if (text == null || width <= text.length()) {
+            return text;
+        }
+        int padding = width - text.length();
+        int padStart = padding / 2;
+        int padEnd = padding - padStart;
+        return " ".repeat(padStart) + text + " ".repeat(padEnd);
+    }
+
+    private static String center(double input, int width) {
+
+        String text = String.valueOf(input);
+
+        if (text == null || width <= text.length()) {
+            return text;
+        }
+        int padding = width - text.length();
+        int padStart = padding / 2;
+        int padEnd = padding - padStart;
+        return " ".repeat(padStart) + text + " ".repeat(padEnd);
     }
 
 }
