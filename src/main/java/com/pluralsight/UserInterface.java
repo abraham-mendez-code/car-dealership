@@ -108,10 +108,10 @@ public class UserInterface {
 
         // get user input
         System.out.print("Enter the make: ");
-        make = scanner.nextLine().trim().toLowerCase();
+        make = scanner.nextLine().trim();
 
         System.out.print("Enter the model: ");
-        model = scanner.nextLine().trim().toLowerCase();
+        model = scanner.nextLine().trim();
 
         // perform search and display result
         displayVehicles(this.dealership.getVehiclesByMakeModel(make, model));
@@ -154,6 +154,12 @@ public class UserInterface {
 
     public void processGetByColorRequest() {
 
+        // get user input
+        System.out.print("Enter a color: ");
+        String color = scanner.nextLine().trim();
+
+        // perform search and display result
+        displayVehicles(this.dealership.getVehiclesByColor(color));
 
     }
 

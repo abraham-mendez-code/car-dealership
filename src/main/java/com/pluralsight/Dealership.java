@@ -36,6 +36,7 @@ public class Dealership {
     // derived getters
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
 
+        // this returns a Vehicle list with price values within a specified range
         return (ArrayList<Vehicle>) vehicles.stream()
                 .filter(v -> v.getPrice() >= min && v.getPrice() <= max)
                 .collect(Collectors.toList());
@@ -44,14 +45,16 @@ public class Dealership {
 
     public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
 
+        // this returns a Vehicle list with matching values for make and model
         return (ArrayList<Vehicle>) vehicles.stream()
-                .filter(v -> v.getMake().toLowerCase().contains(make) && v.getModel().toLowerCase().contains(model))
+                .filter(v -> v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model))
                 .collect(Collectors.toList());
 
     }
 
     public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
 
+        // this returns a Vehicle list with a year within a specified range
         return (ArrayList<Vehicle>) vehicles.stream()
                 .filter(v -> v.getYear() >= min && v.getYear() <= max)
                 .collect(Collectors.toList());
@@ -60,11 +63,15 @@ public class Dealership {
 
     public ArrayList<Vehicle> getVehiclesByColor(String color) {
 
-        return null;
+        // this returns a Vehicle list with matching values for color
+        return (ArrayList<Vehicle>) vehicles.stream()
+                .filter(v -> v.getColor().equalsIgnoreCase(color))
+                .collect(Collectors.toList());
 
     }
 
     public ArrayList<Vehicle> getVehiclesByMileage(double min, double max) {
+
 
         return null;
 
