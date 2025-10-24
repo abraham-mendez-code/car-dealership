@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Dealership {
 
@@ -35,7 +36,9 @@ public class Dealership {
     // derived getters
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
 
-        return null;
+        return (ArrayList<Vehicle>) vehicles.stream()
+                .filter(v -> v.getPrice() >= min && v.getPrice() <= max)
+                .collect(Collectors.toList());
 
     }
 
