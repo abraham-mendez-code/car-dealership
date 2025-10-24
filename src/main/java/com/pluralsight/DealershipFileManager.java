@@ -16,8 +16,46 @@ public class DealershipFileManager {
     // this method reads and loads the inventory file into a list of Vehicles and returns a Dealership
     public static Dealership getDealership() {
 
+        try {
+            // this bufferedReader reads the inventory file
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(inventoryDir));
 
-        return null;
+            // this reads the first line and splits it into tokens
+            String input = bufferedReader.readLine();
+            String[] tokens = input.split("[|]");
+
+            // assign the tokens to attributes for a new dealership
+            String name = tokens[0];
+            String address = tokens[1];
+            String phone = tokens[2];
+
+            // create a new Dealership with the attributes
+            Dealership dealership = new Dealership(name, address, phone);
+
+
+            // this loop reads the rest of the file and adds a new vehicle to the leadership for each entry
+            while ( (input = bufferedReader.readLine()) != null) {
+                tokens  = input.split("[|]");
+
+                int vin = Integer.parseInt(tokens[0]);
+                int year = Integer.parseInt(tokens[1]);
+                String make = tokens[2];
+                String model = tokens[3];
+                String vehicleType = tokens[4];
+                String color = tokens [5];
+                int odometer = Integer.parseInt(tokens[6]);
+                double price = Double.parseDouble(tokens[7]);
+
+                dealership.addVehicle(new Vehicle(vin, year, make, model, vehicleType, color, odometer, price));
+
+
+            }
+
+            return dealership;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
