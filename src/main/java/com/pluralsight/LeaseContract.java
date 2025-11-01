@@ -36,7 +36,10 @@ public class LeaseContract extends Contract{
     // overridden abstract methods
     @Override
     public double getTotalPrice() {
-        return 0;
+
+        double total =  endingValue + leaseFee + monthlyPayment * 36;
+
+        return total;
     }
 
     @Override
