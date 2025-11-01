@@ -3,8 +3,8 @@ package com.pluralsight;
 public class SalesContract extends Contract {
 
     // class attributes
-    private final double SALES_TAX = .05;
-    private final double RECORDING_FEE = 100;
+    double SALES_TAX = .05;
+    double RECORDING_FEE = 100;
 
     private double processingFee;
     private boolean isFinanced;
@@ -25,7 +25,7 @@ public class SalesContract extends Contract {
     public double getTotalPrice() {
 
         /*
-            Total forumula
+            Total formula
                 sum = tax + recordingFee + processingFee + monthlyPayment total
          */
         double total = ( vehicleSold.getPrice() * SALES_TAX ) + RECORDING_FEE + processingFee + getMonthlyPayment() * (vehicleSold.getPrice()) < 10000 ? 24 : 48;
@@ -52,12 +52,15 @@ public class SalesContract extends Contract {
                 → term = 24 months
         */
 
+        // declare formula variables
         double m;
-        double p = vehicleSold.getPrice();
+        double p = vehicleSold.getPrice(); // assign the vehicle price
         double r;
         double n;
 
+        // check if the vehicle is financed
         if (isFinanced) {
+            // check the price and apply the rates per case
             if (p >= 10000) {
                 r = .0425 / 12;
                 n = 48;
@@ -66,7 +69,7 @@ public class SalesContract extends Contract {
                 n = 24;
             }
 
-            m = (r * p) / (1 - Math.pow((1 + r), -n));
+            m = (r * p) / (1 - Math.pow((1 + r), -n)); // calculate monthly payment
 
             return m;
         }

@@ -33,7 +33,7 @@ public abstract class Contract {
         return customerEmail;
     }
 
-    public String getVehicleSold() {
+    public Vehicle getVehicleSold() {
         return vehicleSold;
     }
 
@@ -50,7 +50,7 @@ public abstract class Contract {
         this.customerEmail = customerEmail;
     }
 
-    public void setVehicleSold(String vehicleSold) {
+    public void setVehicleSold(Vehicle vehicleSold) {
         this.vehicleSold = vehicleSold;
     }
 
