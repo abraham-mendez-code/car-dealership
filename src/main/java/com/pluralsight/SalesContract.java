@@ -29,7 +29,42 @@ public class SalesContract extends Contract {
     @Override
     public double getMonthlyPayment() {
 
-       return 0;
+        /*
+            Standard loan payment formula:
+                M = (r x P) / 1 - (1 + r)^-n
+            M = monthly payment
+            P = principle (price or loan amount)
+            r = monthly interest rate (annual rate / 12)
+            n = total number of payments (months)
+
+            If price ≥ $10,000
+                → annual rate = 4.25% = 0.0425
+                → term = 48 months
+            If price < $10,000
+                → annual rate = 5.25% = 0.0525
+                → term = 24 months
+        */
+
+        double m;
+        double p = vehicleSold.getPrice();
+        double r;
+        double n;
+
+        if (isFinanced) {
+            if (p >= 10000) {
+                r = .0425 / 12;
+                n = 48;
+            } else {
+                r = .0525 / 12;
+                n = 24;
+            }
+
+            m = (r * p) / (1 - Math.pow((1 + r), -n));
+
+            return m;
+        }
+
+        return 0; // if not financed there is no monthly payment
 
     }
 
