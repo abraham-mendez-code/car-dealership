@@ -23,7 +23,14 @@ public class SalesContract extends Contract {
     // override contract abstract methods
     @Override
     public double getTotalPrice() {
-        return 0;
+
+        /*
+            Total forumula
+                sum = tax + recordingFee + processingFee + monthlyPayment total
+         */
+        double total = ( vehicleSold.getPrice() * SALES_TAX ) + RECORDING_FEE + processingFee + getMonthlyPayment() * (vehicleSold.getPrice()) < 10000 ? 24 : 48;
+
+        return total;
     }
 
     @Override
