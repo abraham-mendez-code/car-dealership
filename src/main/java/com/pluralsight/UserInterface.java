@@ -64,6 +64,7 @@ public class UserInterface {
                         break;
                     case 10:
                         processSellOrLeaseRequest();
+                        break;
                     case 0:
                         System.out.println("Closing the Application");
                         menuRunning = false;
