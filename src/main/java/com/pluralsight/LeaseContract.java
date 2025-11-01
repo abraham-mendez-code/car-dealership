@@ -5,14 +5,16 @@ public class LeaseContract extends Contract{
     // class attributes
     double endingValue;
     double leaseFee;
+    double principle; // the down payment for a lease
 
     // constructor
-    public LeaseContract (String date, String customerName, String customerEmail, Vehicle vehicleSold) {
+    public LeaseContract (String date, String customerName, String customerEmail, Vehicle vehicleSold, double principle) {
 
         super(date, customerName, customerEmail, vehicleSold);
 
         this.endingValue = vehicleSold.getPrice() * .5; // expected ending value (50% of the original price)
         this.leaseFee = vehicleSold.getPrice() * .07; // lease fee (7% of the original price)
+        this.principle = principle;
 
     }
 
@@ -37,9 +39,7 @@ public class LeaseContract extends Contract{
     @Override
     public double getTotalPrice() {
 
-        double total =  endingValue + leaseFee + monthlyPayment * 36;
-
-        return total;
+        return endingValue + leaseFee + monthlyPayment * 36;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class LeaseContract extends Contract{
 
         // declare formula variables
         double m;
-        double p = vehicleSold.getPrice(); // assign the vehicle price
+        double p = principle;
         double r = .04 / 12;
         double n = 36;
 

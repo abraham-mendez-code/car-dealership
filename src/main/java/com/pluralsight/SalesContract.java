@@ -9,12 +9,14 @@ public class SalesContract extends Contract {
     private double processingFee;
     private boolean isFinanced;
     private double monthlyPayment;
+    private double principle;
 
     // constructor
-    public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold, boolean isFinanced) {
+    public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold, boolean isFinanced, double principle) {
 
         super(date, customerName, customerEmail, vehicleSold);
         this.isFinanced = isFinanced;
+        this.principle = principle;
 
         processingFee = ( vehicleSold.getPrice() < 10000 ? 295 : 495 ); // the processing fee 295 for vehicles less than 10,000, for all other vehicles the fee is 495
 
@@ -28,9 +30,8 @@ public class SalesContract extends Contract {
             Total formula
                 sum = tax + recordingFee + processingFee + monthlyPayment total
          */
-        double total = ( vehicleSold.getPrice() * SALES_TAX ) + RECORDING_FEE + processingFee + getMonthlyPayment() * (vehicleSold.getPrice()) < 10000 ? 24 : 48;
 
-        return total;
+        return ( vehicleSold.getPrice() * SALES_TAX ) + RECORDING_FEE + processingFee + getMonthlyPayment() * (vehicleSold.getPrice()) < 10000 ? 24 : 48;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class SalesContract extends Contract {
 
         // declare formula variables
         double m;
-        double p = vehicleSold.getPrice(); // assign the vehicle price
+        double p = principle; // assign the vehicle price
         double r;
         double n;
 
