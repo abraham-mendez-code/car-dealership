@@ -79,6 +79,15 @@ public class Dealership {
 
     }
 
+    public Vehicle getVehicleByVin(int vin) {
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getVin() == vin) {
+                return vehicle;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Vehicle> getVehiclesByType(String vehicleType) {
 
         // this returns a Vehicle list with matching values for vehicleType
