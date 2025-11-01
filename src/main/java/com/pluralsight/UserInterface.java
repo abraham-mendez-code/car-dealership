@@ -1,7 +1,9 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.SocketHandler;
 import java.util.stream.Collectors;
 
 public class UserInterface {
@@ -14,15 +16,17 @@ public class UserInterface {
     public UserInterface() {
     }
 
+    // this method loads the dealership from the file
     private void init() {
         this.dealership = DealershipFileManager.getDealership();
     }
 
     public void display() {
 
-        init();
+        init(); // Load the dealership
+        boolean menuRunning = true;
 
-        while(true) {
+        while (menuRunning) {
             try {
                 // this prints out the mainMenu display
                 System.out.println(mainMenu());
@@ -58,8 +62,14 @@ public class UserInterface {
                     case 9:
                         processRemoveVehicleRequest();
                         break;
+                    case 10:
+                        processSellOrLeaseRequest();
                     case 0:
-                        return;
+                        System.out.println("Closing the Application");
+                        menuRunning = false;
+                        break;
+                    default:
+                        System.out.println("Invalid option");
                 }
 
             } catch (NumberFormatException e) { // User did not enter a number...
@@ -245,12 +255,75 @@ public class UserInterface {
 
         // remove the vehicle with a matching vin
         dealership.removeVehicle(
-        this.dealership.getAllVehicles().stream()
-                .filter(v -> v.getVin() == vin)
-                .collect(Collectors.toList()).get(0));
+                this.dealership.getAllVehicles().stream()
+                        .filter(v -> v.getVin() == vin)
+                        .collect(Collectors.toList()).get(0));
 
         // Save the dealership
         DealershipFileManager.saveDealership(dealership);
+
+    }
+
+    public void processSellOrLeaseRequest() {
+
+        try {
+            // create an instance of the ContractFileManager class
+            ContractFileManager contractFileManager = new ContractFileManager();
+
+            // parse user input for vin
+            int vin = getAInteger("Enter the vehicle vin: ");
+
+            Vehicle vehicle = dealership.getVehicleByVin(vin);
+            // return to menu if the Vehicle is not found
+            if (vehicle == null) {
+                System.out.println("Vehicle not found.");
+                return;
+            }
+
+            // get Contract info
+            String name = getAString("Enter customer name: ");
+
+            String email = getAString("Enter customer email: ");
+
+            String type = getAString("Is this a Sale or Lease? (Enter 'sale' or 'lease'): ");
+
+            //get the date for the contract and start building the sale/lease contract
+            LocalDate date = LocalDate.now();
+            Contract contract = null;
+
+            if (type.equalsIgnoreCase("sale")) {
+
+                boolean financed = getAString("Is this financed? (yes/no): ").equalsIgnoreCase("yes");
+                contract = new SalesContract(date.toString(), name, email, vehicle, financed, vehicle.getPrice());
+            } else if (type.equals("lease")) {
+                int currentYear = date.getYear();
+                if (vehicle.getYear() <= currentYear - 3) {
+                    System.out.println("Vehicle is too old for a lease (must be 3 years or newer). Returning to menu.");
+                    return;
+                }
+                contract = new LeaseContract(date.toString(), name, email, vehicle, vehicle.getPrice());
+            } else {
+                System.out.println("Invalid contract type. Returning to menu.");
+                return;
+            }
+
+            // save the contract
+            contractFileManager.saveContract(contract);
+
+            // remove the vehicle from inventory
+            dealership.removeVehicle(vehicle);
+
+            // save the dealership inventory
+            DealershipFileManager.saveDealership(dealership);
+
+            System.out.println("Contract recorded successfully and vehicle removed from inventory.");
+
+        }
+        catch (Exception e) {
+
+            System.out.println("Error during contract creation: " + e.getMessage());
+
+        }
 
     }
 
@@ -280,6 +353,7 @@ public class UserInterface {
                 7 - View all Vehicles
                 8 - Add Inventory
                 9 - Remove Inventory
+                10 - Sell/Lease a Vehicle
                 0 - Exit
                 Enter a command:\s""";
     }
@@ -300,12 +374,12 @@ public class UserInterface {
 
         System.out.println(input);
 
-        for (int i = 0; i < input.length(); i++){
+        for (int i = 0; i < input.length(); i++) {
             System.out.print("=");
         }
         System.out.println();
 
-        for (Vehicle vehicle: vehicles) {
+        for (Vehicle vehicle : vehicles) {
 
             // get the attributes for the current vehicle
             int vin = vehicle.getVin();
