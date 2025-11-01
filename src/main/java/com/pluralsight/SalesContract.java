@@ -22,6 +22,27 @@ public class SalesContract extends Contract {
 
     }
 
+    // getter methods
+    public double getPrinciple() {
+        return principle;
+    }
+
+    public boolean isFinanced() {
+        return isFinanced;
+    }
+
+    public double getProcessingFee() {
+        return processingFee;
+    }
+
+    public double getRECORDING_FEE() {
+        return RECORDING_FEE;
+    }
+
+    public double getSALES_TAX() {
+        return SALES_TAX;
+    }
+
     // override contract abstract methods
     @Override
     public double getTotalPrice() {
