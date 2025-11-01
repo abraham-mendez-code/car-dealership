@@ -6,12 +6,12 @@ public abstract class Contract {
     String date;
     String customerName;
     String customerEmail;
-    String vehicleSold;
+    Vehicle vehicleSold;
     double totalPrice;
     double monthlyPayment;
 
     // constructor
-    public Contract (String date, String customerName, String customerEmail, String vehicleSold ) {
+    public Contract (String date, String customerName, String customerEmail, Vehicle vehicleSold ) {
 
         this.date = date;
         this.customerName = customerName;
